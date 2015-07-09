@@ -8,9 +8,17 @@ public class PlayerController : UnitController {
 	
 	}
 	
+	// Update is called once per phisics frame
+	void FixedUpdate() {
+		/*-- Moving --*/
+		move.x = Input.GetAxis("Horizontal");
+		move.y = Input.GetAxis("Vertical");
+	}
+	
 	// Update is called once per frame
 	void Update () {
-		print(Input.GetAxis("Horizontal"));
-		print(Input.GetAxis("Vertical"));
+		/*-- Moving --*/
+		Move();
+
 	}
 }
