@@ -19,6 +19,5 @@ public class PlayerController : UnitController {
 	void Update () {
 		/*-- Moving --*/
 		Move();
-
 	}
 }
