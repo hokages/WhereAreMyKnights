@@ -11,7 +11,7 @@ public abstract class UnitController : MonoBehaviour {
 	protected Vector2 move = new Vector2(0, 0);
 	protected Vector2 velocity;
 	protected bool facingRight = false;
-	protected List<[string effect, float time]> effects = new List<string>();
+	protected List<[string effect: float time]> effects = new List<string>();
 	
 	protected virtual void Flip() {
 		facingRight = !facingRight;
