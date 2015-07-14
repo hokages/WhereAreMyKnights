@@ -46,23 +46,23 @@ public class MovingLayer {
 		}
 		
 		MovingLayerPart mainSprite = new MovingLayerPart();
-		mainSprite.setSprite(background);
-		mainSprite.setSize(size);
+		mainSprite.SetSprite(background);
+		mainSprite.SetSize(size);
 		parts.Add(mainSprite);
 
 		sign.x = speed.x < 0 ? 1 : -1;
 		sign.y = speed.y < 0 ? 1 : -1;
 		
 		if (speed.y != 0) {
-			setClone(0, size.y, "vertical");
+			SetClone(0, size.y, "vertical");
 		}
 		
 		if (speed.x != 0) {
-			setClone(size.x, 0, "horisontal");
+			SetClone(size.x, 0, "horisontal");
 		}
 		
 		if (speed.x != 0 && speed.y != 0) {
-			setClone(size.x, size.y, "diagonal");
+			SetClone(size.x, size.y, "diagonal");
 		}
 		
 		foreach (MovingLayerPart part in parts) {
@@ -76,14 +76,14 @@ public class MovingLayer {
 		}
 	}
 	
-	private void setClone(float sizeX = 0, float sizeY = 0, string name = "") {
+	private void SetClone(float sizeX = 0, float sizeY = 0, string name = "") {
 		MovingLayerPart verticalSprite = new MovingLayerPart();
 		Transform verticalSpriteTransform = Transform.Instantiate(background) as Transform;
 		verticalSpriteTransform.transform.parent = background.transform.parent;
 		verticalSpriteTransform.transform.name = background.transform.name + " " + name + " clone";
-		verticalSprite.setSprite(verticalSpriteTransform);
-		verticalSprite.setDelta(new Vector2(sizeX * sign.x, sizeY * sign.y));
-		verticalSprite.setSize(size);
+		verticalSprite.SetSprite(verticalSpriteTransform);
+		verticalSprite.SetDelta(new Vector2(sizeX * sign.x, sizeY * sign.y));
+		verticalSprite.SetSize(size);
 		parts.Add(verticalSprite);
 	}
 	
@@ -97,13 +97,13 @@ public class MovingLayerPart {
 	private Vector2 delta = new Vector2(0, 0);
 	private Vector3 startPositin;
 	
-	public void setSprite(Transform newTransform) {
+	public void SetSprite(Transform newTransform) {
 		transform = newTransform;
 	}
-	public void setDelta(Vector2 newDelta) {
+	public void SetDelta(Vector2 newDelta) {
 		delta = newDelta;
 	}
-	public void setSize(Vector2 newSize) {
+	public void SetSize(Vector2 newSize) {
 		size = newSize;
 	}
 	
