@@ -9,11 +9,11 @@ public abstract class WeaponController : MonoBehaviour {
 		if (hitBox.tag == hitboxTag) {
 			Transform target = hitBox.GetComponent<Transform>().parent;
 			CauseADamage(target);
-			addEffect(target);
+			AddEffect(target);
 		}
 	}
 
 	protected virtual void CauseADamage(Transform target){}
 
-	protected virtual void addEffect(Transform target){}
+	protected virtual void AddEffect(Transform target){}
 }
