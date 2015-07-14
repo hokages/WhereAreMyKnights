@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 
 public abstract class UnitController : MonoBehaviour {
-	public int health = 100;
+	public float health = 100;
 	public float speed = 0.2f;
 	public float smoothTime = 0.1f;
 
 	protected Vector2 move = new Vector2(0, 0);
-	protected bool facingRight = false;
 	protected Vector2 velocity;
+	protected bool facingRight = false;
+	protected List<[string effect, float time]> effects = new List<string>();
 	
 	protected virtual void Flip() {
 		facingRight = !facingRight;
@@ -38,5 +41,17 @@ public abstract class UnitController : MonoBehaviour {
 		} else if (move.x < 0 && facingRight) {
 			Flip();
 		}
+	}
+	
+	public virtual void TakeADamage(float dmg) {
+		health -= dmg;
+	}
+	
+	public virtual void TakeAEffect(float dmg) {
+		health -= dmg;
+	}
+	
+	public virtual void Death() {
+		DestroyObject(this.gameObject);
 	}
 }
