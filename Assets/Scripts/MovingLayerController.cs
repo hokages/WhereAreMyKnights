@@ -32,9 +32,9 @@ public class MovingLayer {
 	public Vector2 size = new Vector2(0, 0);
 	public Vector2 speed = new Vector2(0, 0);
 	
-	private Vector3 movingSpeed3;
-	private List<MovingLayerPart> parts = new List<MovingLayerPart>();
-	private Vector2 sign = new Vector2(1, 1);
+	private Vector3 __movingSpeed3;
+	private List<MovingLayerPart> __parts = new List<MovingLayerPart>();
+	private Vector2 __sign = new Vector2(1, 1);
 	
 	public void Start() {
 		
@@ -48,43 +48,43 @@ public class MovingLayer {
 		MovingLayerPart mainSprite = new MovingLayerPart();
 		mainSprite.SetSprite(background);
 		mainSprite.SetSize(size);
-		parts.Add(mainSprite);
+		__parts.Add(mainSprite);
 
-		sign.x = speed.x < 0 ? 1 : -1;
-		sign.y = speed.y < 0 ? 1 : -1;
+		__sign.x = speed.x < 0 ? 1 : -1;
+		__sign.y = speed.y < 0 ? 1 : -1;
 		
 		if (speed.y != 0) {
-			SetClone(0, size.y, "vertical");
+			__SetClone(0, size.y, "vertical");
 		}
 		
 		if (speed.x != 0) {
-			SetClone(size.x, 0, "horisontal");
+			__SetClone(size.x, 0, "horisontal");
 		}
 		
 		if (speed.x != 0 && speed.y != 0) {
-			SetClone(size.x, size.y, "diagonal");
+			__SetClone(size.x, size.y, "diagonal");
 		}
 		
-		foreach (MovingLayerPart part in parts) {
+		foreach (MovingLayerPart part in __parts) {
 			part.Start();
 		}
 	}
 	
 	public void Update() {
-		foreach (MovingLayerPart part in parts) {
+		foreach (MovingLayerPart part in __parts) {
 			part.Update(speed);
 		}
 	}
 	
-	private void SetClone(float sizeX = 0, float sizeY = 0, string name = "") {
+	private void __SetClone(float sizeX = 0, float sizeY = 0, string name = "") {
 		MovingLayerPart verticalSprite = new MovingLayerPart();
 		Transform verticalSpriteTransform = Transform.Instantiate(background) as Transform;
 		verticalSpriteTransform.transform.parent = background.transform.parent;
 		verticalSpriteTransform.transform.name = background.transform.name + " " + name + " clone";
 		verticalSprite.SetSprite(verticalSpriteTransform);
-		verticalSprite.SetDelta(new Vector2(sizeX * sign.x, sizeY * sign.y));
+		verticalSprite.SetDelta(new Vector2(sizeX * __sign.x, sizeY * __sign.y));
 		verticalSprite.SetSize(size);
-		parts.Add(verticalSprite);
+		__parts.Add(verticalSprite);
 	}
 	
 }
@@ -92,48 +92,48 @@ public class MovingLayer {
 
 [System.Serializable]
 public class MovingLayerPart {
-	private Transform transform;
-	private Vector2 size = new Vector2(0, 0);
-	private Vector2 delta = new Vector2(0, 0);
-	private Vector3 startPositin;
+	private Transform __transform;
+	private Vector2 __size = new Vector2(0, 0);
+	private Vector2 __delta = new Vector2(0, 0);
+	private Vector3 __startPositin;
 	
 	public void SetSprite(Transform newTransform) {
-		transform = newTransform;
+		__transform = newTransform;
 	}
 	public void SetDelta(Vector2 newDelta) {
-		delta = newDelta;
+		__delta = newDelta;
 	}
 	public void SetSize(Vector2 newSize) {
-		size = newSize;
+		__size = newSize;
 	}
 	
 	public void Start() {
-		transform.position = new Vector3(
-			transform.position.x + delta.x,
-			transform.position.y + delta.y,
-			transform.position.z
+		__transform.position = new Vector3(
+			__transform.position.x + __delta.x,
+			__transform.position.y + __delta.y,
+			__transform.position.z
 			);
-		startPositin = transform.position;
+		__startPositin = __transform.position;
 	}
 	public void Update(Vector2 speed) {
 		Vector3 newPos = new Vector3(
-			transform.position.x + speed.x,
-			transform.position.y + speed.y,
-			transform.position.z
+			__transform.position.x + speed.x,
+			__transform.position.y + speed.y,
+			__transform.position.z
 		);
 
-		if (newPos.x - startPositin.x > size.x) {
-			newPos.x -= size.x;
-		} else if (newPos.x - startPositin.x < -size.x) {
-			newPos.x += size.x;
+		if (newPos.x - __startPositin.x > __size.x) {
+			newPos.x -= __size.x;
+		} else if (newPos.x - __startPositin.x < -__size.x) {
+			newPos.x += __size.x;
 		}
 
-		if (newPos.y - startPositin.y > size.y) {
-			newPos.y -= size.y;
-		} else if (newPos.y - startPositin.y < -size.y) {
-			newPos.y += size.y;
+		if (newPos.y - __startPositin.y > __size.y) {
+			newPos.y -= __size.y;
+		} else if (newPos.y - __startPositin.y < -__size.y) {
+			newPos.y += __size.y;
 		}
 
-		transform.position = newPos;
+		__transform.position = newPos;
 	}
 }

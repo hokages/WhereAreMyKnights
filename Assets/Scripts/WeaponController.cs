@@ -9,13 +9,13 @@ public abstract class WeaponController : MonoBehaviour {
 
 		if (hitBox.tag == hitboxTag) {
 			HitboxController hitboxController = hitBox.GetComponent<HitboxController>();
-			CauseADamage(hitboxController);
+			_CauseADamage(hitboxController);
 		}
 	}
 
-	protected virtual void CauseADamage(HitboxController hitboxController){
+	protected virtual void _CauseADamage(HitboxController hitboxController){
 		hitboxController.provideDamage(damage);
 	}
 
-	protected virtual void AddEffect(Transform target){}
+	protected virtual void _AddEffect(Transform target){}
 }

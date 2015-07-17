@@ -7,8 +7,6 @@ public class CameraController : MonoBehaviour {
 	public Vector2 smooth = new Vector2(2, 2); 		// How smoothly the camera catches up with it's target movement.
 	public Vector2 bordersMax = new Vector2(2, 2);
 	public Vector2 bordersMin = new Vector2(-2, -2);
-
-	private Vector2 velocity; // speed of camera movement
 	
 	bool CheckXMargin() {
 		// Returns true if the distance between the camera and the player in the x axis is greater than the x margin.
