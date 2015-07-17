@@ -6,14 +6,16 @@ public abstract class WeaponController : MonoBehaviour {
 	public float damage = 10;
 	
 	public virtual void OnTriggerEnter2D(Collider2D hitBox) {
+
 		if (hitBox.tag == hitboxTag) {
-			Transform target = hitBox.GetComponent<Transform>().parent;
-			CauseADamage(target);
-			AddEffect(target);
+			HitboxController hitboxController = hitBox.GetComponent<HitboxController>();
+			CauseADamage(hitboxController);
 		}
 	}
 
-	protected virtual void CauseADamage(Transform target){}
+	protected virtual void CauseADamage(HitboxController hitboxController){
+		hitboxController.provideDamage(damage);
+	}
 
 	protected virtual void AddEffect(Transform target){}
 }
