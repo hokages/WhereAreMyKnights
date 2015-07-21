@@ -7,10 +7,14 @@ public abstract class UnitController : MonoBehaviour {
 	public float health = 100;
 	public float speed = 0.2f;
 	public float smoothTime = 0.1f;
+	public float moveBackFactor = 0.4f;
+	public float moveSideFactor = 0.8f;
 
 	protected Vector2 _move = new Vector2(0, 0);
+	protected Vector2 _face = new Vector2(-1, 0);
 	protected Vector2 _velocity;
 	protected bool _facingRight = false;
+	protected float _direction = 1.57f;
 	
 	public virtual void TakeADamage(float dmg) {
 		health -= dmg;
@@ -22,12 +26,19 @@ public abstract class UnitController : MonoBehaviour {
 	public virtual void Death() {
 		DestroyObject(this.gameObject);
 	}
+
+	public float getDirection() {
+		return _direction;
+	}
 	
-	protected virtual void _Flip() {
-		_facingRight = !_facingRight;
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+	protected virtual void _UpdateDirection() {
+		if (Vector2.zero != _face) {
+			_direction = Mathf.Acos(_face.normalized.y);
+			if (_face.x < 0) {
+				_direction = Mathf.PI * 2 - _direction;
+			}
+
+		}
 	}
 		
 	protected virtual void _Move() {
@@ -46,10 +57,5 @@ public abstract class UnitController : MonoBehaviour {
 			smoothTime
 		);
 		transform.position = new Vector3(targetX, targetY, transform.position.z);
-		if (_move.x > 0 && !_facingRight) {
-			_Flip();
-		} else if (_move.x < 0 && _facingRight) {
-			_Flip();
-		}
 	}
 }
