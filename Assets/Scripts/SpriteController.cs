@@ -16,7 +16,7 @@ public class SpriteController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float newDirection = __unitController.getDirection();
+		float newDirection = __unitController.GetDirection();
 		if (newDirection != __direction) {
 			__direction = newDirection;
 			int sprite = (int) Mathf.Round(__direction / __sector);

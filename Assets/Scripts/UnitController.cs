@@ -30,7 +30,7 @@ public abstract class UnitController : MonoBehaviour {
 		DestroyObject(this.gameObject);
 	}
 
-	public float getDirection() {
+	public float GetDirection() {
 		float direction = Mathf.Acos(_direction.y);
 		if (_direction.x < 0) {
 			direction = Mathf.PI * 2 - direction;
