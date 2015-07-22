@@ -62,13 +62,13 @@ public abstract class UnitController : MonoBehaviour {
 
 		targetX = Mathf.SmoothDamp (
 			transform.position.x,
-			transform.position.x + _move.x * usedSpeed,
+			transform.position.x + _move.normalized.x * usedSpeed,
 			ref _velocity.x,
 			smoothTime
 			);
 		targetY = Mathf.SmoothDamp (
 			transform.position.y,
-			transform.position.y + _move.y * usedSpeed,
+			transform.position.y + _move.normalized.y * usedSpeed,
 			ref _velocity.y,
 			smoothTime
 		);
